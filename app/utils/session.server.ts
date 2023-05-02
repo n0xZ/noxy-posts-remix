@@ -4,7 +4,7 @@ import bcryptjs from 'bcryptjs'
 
 const sessionStorage = createCookieSessionStorage({
 	cookie: {
-		name: 'fb:token',
+		name: '_nx-session',
 		secure: process.env.NODE_ENV === 'production',
 		secrets: [process.env.SESSION_SECRET],
 		sameSite: 'lax',
