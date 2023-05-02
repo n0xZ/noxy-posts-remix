@@ -1,5 +1,5 @@
-import { cssBundleHref } from '@remix-run/css-bundle'
-import type { LinksFunction } from '@remix-run/node'
+
+import type { LinksFunction, V2_MetaFunction } from '@remix-run/node'
 import {
 	Links,
 	LiveReload,
@@ -14,6 +14,7 @@ export const links: LinksFunction = () => [
 	{ rel: 'stylesheet', href: stylesheet },
 ]
 
+export const meta :V2_MetaFunction = () =>[{title:"Bienvenido a Noxy - posts!"}]
 export default function App() {
 	return (
 		<html lang="en">
