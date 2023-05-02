@@ -1,4 +1,10 @@
-import type { ActionArgs } from '@remix-run/node'
+import type {
+	ActionArgs,
+	LoaderArgs,
+	V2_MetaFunction} from '@remix-run/node';
+import {
+	redirect,
+} from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
 import {
@@ -8,7 +14,7 @@ import {
 } from 'domain-functions'
 import { z } from 'zod'
 import { Spinner } from '~/components/icon/spinner'
-import { createUserSession, login } from '~/utils/session.server'
+import { createUserSession, getSession, login } from '~/utils/session.server'
 
 const signInValidator = z.object({
 	email: z.string().email({ message: 'Formato de email ingresado no válido' }),
@@ -22,6 +28,12 @@ const parseFormEntries = makeDomainFunction(signInValidator)(
 		return id
 	}
 )
+
+export const loader = async ({ request }: LoaderArgs) => {
+	const existingSession = await getSession(request)
+	if (!existingSession.get('userId')) return null
+	return redirect('/home', 302)
+}
 export const action = async ({ request }: ActionArgs) => {
 	const result = await parseFormEntries(await inputFromForm(request))
 
@@ -38,6 +50,10 @@ export const action = async ({ request }: ActionArgs) => {
 		{ status: result.success ? 200 : 400 }
 	)
 }
+
+export const meta: V2_MetaFunction = () => [
+	{ title: 'Noxy - posts | Iniciar sesión' },
+]
 export default function Login() {
 	const actionData = useActionData<typeof action>()
 	const navigation = useNavigation()
@@ -48,8 +64,11 @@ export default function Login() {
 				method="POST"
 				className="container flex flex-col justify-center max-w-3xl p-2 space-y-3 xl:p-0 h-full"
 			>
+				<h1 className="text-center xl:text-4xl text-3xl font-bold mb-6">
+					Iniciá sesión en Noxy - posts!
+				</h1>
 				<aside className="flex flex-col justify-center space-y-2">
-					<label htmlFor="email" className="text-xl font-medium">
+					<label htmlFor="email" className="xl:text-xl font-medium">
 						Correo electrónico
 					</label>
 					<input
@@ -65,7 +84,7 @@ export default function Login() {
 				</aside>
 
 				<aside className="flex flex-col justify-center space-y-2">
-					<label htmlFor="password" className="text-xl font-medium">
+					<label htmlFor="password" className="xl:text-xl font-medium">
 						Contraseña
 					</label>
 					<input
@@ -82,7 +101,7 @@ export default function Login() {
 				<button
 					type="submit"
 					disabled={isSubmitting}
-					className="w-full p-3 rounded-lg bg-violet-600 c-white hover:bg-violet-700 duration-100 ease-in-out flex flex-row items-center justify-center space-x-2"
+					className="w-full p-3 rounded-lg bg-violet-600 text-white font-bold hover:bg-violet-700 duration-100 ease-in-out flex flex-row items-center justify-center space-x-2"
 				>
 					{isSubmitting ? (
 						<>
