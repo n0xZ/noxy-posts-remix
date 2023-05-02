@@ -9,6 +9,7 @@ specifiers:
   '@remix-run/react': ^1.16.0
   '@remix-run/serve': ^1.16.0
   '@remix-run/vercel': ^1.16.0
+  '@types/bcryptjs': ^2.4.2
   '@types/react': ^18.0.35
   '@types/react-dom': ^18.0.11
   '@vercel/node': ^2.10.3
@@ -42,6 +43,7 @@ devDependencies:
   '@remix-run/dev': 1.16.0_@remix-run+serve@1.16.0
   '@remix-run/eslint-config': 1.16.0_7wdufnds46xchpyl5rjfgiz2ky
   '@remix-run/serve': 1.16.0
+  '@types/bcryptjs': 2.4.2
   '@types/react': 18.2.0
   '@types/react-dom': 18.2.1
   eslint: 8.39.0
@@ -1936,6 +1938,10 @@ packages:
 
   /@types/aria-query/5.0.1:
     resolution: {integrity: sha512-XTIieEY+gvJ39ChLcB4If5zHtPxt3Syj5rgZR+e1ctpmK8NjPf0zFqsz4JpLJT0xla9GFDKjy8Cpu331nrmE1Q==}
+    dev: true
+
+  /@types/bcryptjs/2.4.2:
+    resolution: {integrity: sha512-LiMQ6EOPob/4yUL66SZzu6Yh77cbzJFYll+ZfaPiPPFswtIlA/Fs1MzdKYA7JApHU49zQTbJGX3PDmCpIdDBRQ==}
     dev: true
 
   /@types/cacheable-request/6.0.3:
