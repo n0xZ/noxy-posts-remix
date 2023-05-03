@@ -15,6 +15,7 @@ model User{
   id String @unique @default(cuid())
 username String
 email String @unique
+avatarUrl String
 passwordHashed String
 createdAt DateTime @default(now())
 posts Post[]
