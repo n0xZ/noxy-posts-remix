@@ -71,6 +71,23 @@ export async function createUserSession(userId?: string) {
 		},
 	})
 }
+export async function getUserId(request: Request): Promise<string | undefined> {
+	const session = await getSession(request)
+	const userId = session.get('userId')
+	return userId
+}
+
+export async function requireUserId(
+	request: Request,
+	redirectTo: string = new URL(request.url).pathname
+) {
+	const userId = await getUserId(request)
+	if (!userId) {
+		const searchParams = new URLSearchParams([['redirectTo', redirectTo]])
+		throw redirect(`/login?${searchParams}`)
+	}
+	return userId
+}
 export async function logout(request: Request) {
 	const session = await getSession(request)
 	return redirect('/', {
