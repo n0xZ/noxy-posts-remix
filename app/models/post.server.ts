@@ -14,7 +14,7 @@ export const createPost = async ({
 	tag,
 	userId,
 }: {
-	userId: string
+	userId?: string
 	title: string
 	slug: string
 	tag: string
