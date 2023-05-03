@@ -11,17 +11,17 @@ export const createPost = async ({
 	title,
 	content,
 	slug,
-	tags,
+	tag,
 	userId,
 }: {
 	userId: string
 	title: string
 	slug: string
-	tags: string[]
+	tag: string
 	content: string
 }) => {
 	const createdPost = await prisma.post.create({
-		data: { slug, title, author: { connect: { id: userId } }, content, tags },
+		data: { slug, title, author: { connect: { id: userId } }, content, tag },
 	})
 	return createdPost
 }
@@ -34,18 +34,18 @@ export const deletePost = async ({ id }: { id: string }) => {
 export const updatePost = async ({
 	content,
 	slug,
-	tags,
+	tag,
 	title,
 	id,
 }: {
 	id: string
 	title?: string
 	slug?: string
-	tags?: string[]
+	tag?: string
 	content?: string
 }) => {
 	const updatedPost = await prisma.post.update({
-		data: { title, tags, slug, content },
+		data: { title, tag, slug, content },
 		where: { id },
 	})
 	return updatedPost
