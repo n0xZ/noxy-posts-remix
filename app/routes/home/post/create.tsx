@@ -22,7 +22,7 @@ export const action = async ({ request }: ActionArgs) => {
 	const userId = await getUserId(request)
 	const parseFormEntries = makeDomainFunction(createPostSchema)(
 		async ({ content, tag, title }) => {
-			const newSlug = title.replaceAll(' ', '-')
+			const newSlug = title.replaceAll(' ', '-').toLowerCase()
 			const newPost = await createPost({ content, slug:newSlug, tag, title, userId })
 			if (!newPost) throw new Error('Ocurrió un error al crear el post')
 			return newPost
