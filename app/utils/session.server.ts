@@ -45,11 +45,13 @@ export const register = async ({
 	email: string
 	password: string
 }) => {
+	const DICEBEAR_API_URL = process.env.DICEBEAR_API_URL ?? ''
 	const existingUser = await prisma.user.findUnique({ where: { email } })
 	if (existingUser) return null
 	const passwordHashed = await bcryptjs.hash(password, 10)
+	const defaultAvatarUrl = `${DICEBEAR_API_URL}/svg?seed=${username}`
 	const createdUser = await prisma.user.create({
-		data: { email, passwordHashed, username },
+		data: { email, passwordHashed, username, avatarUrl: defaultAvatarUrl },
 	})
 	return {
 		id: createdUser.id,
