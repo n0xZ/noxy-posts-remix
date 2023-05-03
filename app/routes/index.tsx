@@ -9,7 +9,7 @@ export default function Index() {
 	return (
 		<>
 			<header className="p-10">
-				<nav className="font-radioCanada container flex flex-row items-center justify-between max-w-2xl mx-auto xl:text-2xl lg:text-2xl text-xl">
+				<nav className="container flex flex-row items-center justify-between max-w-2xl mx-auto text-xl font-bold font-radioCanada xl:text-2xl lg:text-2xl">
 					<Link to="/" className="text-violet-500">
 						{' '}
 						Noxy-posts
