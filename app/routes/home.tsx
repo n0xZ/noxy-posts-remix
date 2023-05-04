@@ -9,7 +9,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 	const userId = await requireUserId(request)
 	const loggedUser = await prisma.user.findUnique({ where: { id: userId } })
 
-	return { username: loggedUser?.username }
+	return { avatar: loggedUser?.avatarUrl, username: loggedUser?.username }
 }
 
 export const action = async ({ request }: ActionArgs) => logout(request)
@@ -133,7 +133,13 @@ export default function Home() {
 			<header className="p-10 border-b-2 dark:border-[#181818] border-gray-50">
 				<nav className="container flex flex-row items-center justify-between max-w-3xl mx-auto text-xl font-sarabun">
 					<NavLink to="/home" className="font-bold">
-						👋🏻 {user.username}
+						<img
+							src={user.avatar}
+							alt={`Avatar de ${user.username}`}
+							className="rounded-full bg-gray-50"
+							height={48}
+							width={48}
+						/>
 					</NavLink>
 					<ul className="flex-row items-center hidden space-x-5 xl:flex">
 						<li>
