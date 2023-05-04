@@ -7,6 +7,10 @@ export const getPostsByUserId = async (userId?: string) => {
 	return existingPosts
 }
 
+export const getPostbySlug = async (slug?: string) => {
+	const post = await prisma.post.findFirst({ where: { slug } })
+	return post
+}
 export const createPost = async ({
 	title,
 	content,
