@@ -1,4 +1,4 @@
-import type { LoaderArgs } from '@remix-run/node'
+import type { LoaderArgs, V2_MetaFunction } from '@remix-run/node'
 import {
 	isRouteErrorResponse,
 	useLoaderData,
@@ -25,6 +25,9 @@ export const ErrorBoundary = () => {
 			</HomeLayout>
 		)
 }
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) => [
+	{ title: `Noxy - posts: ${data.post.title}"` },
+]
 export default function Post() {
 	const loaderData = useLoaderData<typeof loader>()
 
