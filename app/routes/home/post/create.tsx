@@ -7,9 +7,9 @@ import {
 	makeDomainFunction,
 } from 'domain-functions'
 import { z } from 'zod'
+
 import { Spinner } from '~/components/icon/spinner'
 import { createPost } from '~/models/post.server'
-import { prisma } from '~/utils/prisma.server'
 import { getUserId } from '~/utils/session.server'
 
 const createPostSchema = z.object({
@@ -23,7 +23,13 @@ export const action = async ({ request }: ActionArgs) => {
 	const parseFormEntries = makeDomainFunction(createPostSchema)(
 		async ({ content, tag, title }) => {
 			const newSlug = title.replaceAll(' ', '-').toLowerCase()
-			const newPost = await createPost({ content, slug:newSlug, tag, title, userId })
+			const newPost = await createPost({
+				content,
+				slug: newSlug,
+				tag,
+				title,
+				userId,
+			})
 			if (!newPost) throw new Error('Ocurrió un error al crear el post')
 			return newPost
 		}
@@ -51,6 +57,7 @@ export default function CreatePost() {
 	const actionData = useActionData<typeof action>()
 	const navigation = useNavigation()
 	const isSubmitting = navigation.state === 'submitting'
+
 	return (
 		<main className="grid h-screen place-items-center">
 			<Form
@@ -69,7 +76,7 @@ export default function CreatePost() {
 						name="title"
 						disabled={isSubmitting}
 						placeholder="janedoe@example.com"
-						className="w-full p-3 rounded-md shadow-md bg-[#181818] outline-none"
+						className="w-full p-3 rounded-md shadow-md bg-[#181818] outline-none border-2 border-[#3c3c3c]"
 					/>
 					<span className="h-6 text-red-500">
 						{actionData && actionData.title && actionData?.title[0]}
@@ -85,7 +92,7 @@ export default function CreatePost() {
 						name="tag"
 						disabled={isSubmitting}
 						placeholder="React, Sofware development."
-						className="w-full p-3 rounded-md shadow-md bg-[#181818] outline-none"
+						className="w-full p-3 rounded-md shadow-md bg-[#181818] outline-none border-2 border-[#2d2d2d]"
 					/>
 					<span className="h-6 text-red-500">
 						{actionData && actionData.tag && actionData?.tag[0]}
@@ -99,7 +106,7 @@ export default function CreatePost() {
 						name="content"
 						disabled={isSubmitting}
 						placeholder="***********"
-						className="w-full p-3 rounded-md shadow-md bg-[#181818] outline-none min-h-64"
+						className="w-full p-3 rounded-md shadow-md bg-[#181818] outline-none h-96 h-full border-2 border-[#2d2d2d]"
 					/>
 					<span className="h-6 text-red-500">
 						{actionData && actionData.content && actionData?.content[0]}
