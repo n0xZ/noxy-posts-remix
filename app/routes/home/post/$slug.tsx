@@ -33,7 +33,7 @@ export default function Post() {
 	).toLocaleDateString()
 
 	return (
-		<HomeLayout overrideClassStyles="prose xl:prose-xl prose-invert">
+		<HomeLayout overrideClassStyles="prose xl:prose-xl lg:prose-lg prose-md mt-6 prose-invert font-varta p-2">
 			<h2 className="font-bold ">{loaderData.post.title}</h2>
 			<time className="text-[#4a4a4a]" dateTime={publishedPostDate}>
 				{publishedPostDate}

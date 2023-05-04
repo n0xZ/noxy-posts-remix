@@ -1,4 +1,3 @@
-
 import type { LinksFunction, V2_MetaFunction } from '@remix-run/node'
 import {
 	Links,
@@ -14,7 +13,9 @@ export const links: LinksFunction = () => [
 	{ rel: 'stylesheet', href: stylesheet },
 ]
 
-export const meta :V2_MetaFunction = () =>[{title:"Bienvenido a Noxy - posts!"}]
+export const meta: V2_MetaFunction = () => [
+	{ title: 'Bienvenido a Noxy - posts!' },
+]
 export default function App() {
 	return (
 		<html lang="en">
@@ -28,9 +29,10 @@ export default function App() {
 					crossOrigin="anonymous"
 				/>
 				<link
-					href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300&family=Sarabun:wght@300&display=swap"
+					href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300&family=Sarabun:wght@300&family=Varta:wght@300&display=swap"
 					rel="stylesheet"
 				/>
+
 				<Meta />
 				<Links />
 			</head>

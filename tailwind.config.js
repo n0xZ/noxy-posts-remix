@@ -10,6 +10,7 @@ module.exports = {
 			fontFamily: {
 				sarabun: 'Sarabun',
 				radioCanada: 'Radio Canada',
+				varta: 'Varta',
 			},
 		},
 	},
