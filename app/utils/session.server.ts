@@ -28,7 +28,7 @@ export const login = async ({
 		password,
 		existingUser.passwordHashed
 	)
-	console.log(matchesPassword)
+
 	if (!matchesPassword) return null
 
 	return {
