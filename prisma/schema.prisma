@@ -9,16 +9,16 @@ datasource db {
   provider = "postgresql"
   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
+
 model User{
   id String @unique @default(cuid())
-username String
-email String @unique
-avatarUrl String
-passwordHashed String
-createdAt DateTime @default(now())
-posts Post[]
+  username String
+  email String @unique
+  avatarUrl String
+  passwordHashed String
+  createdAt DateTime @default(now())
+  posts Post[]
 }
 
 model Post{
